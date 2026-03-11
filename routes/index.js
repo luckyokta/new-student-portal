@@ -20,3 +20,5 @@ router.put('/:id', authorization, StudentController.update)
 router.delete('/:id', authorization, StudentController.delete)
 
 module.exports = router
+
+//check
