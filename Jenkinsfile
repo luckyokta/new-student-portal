@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        
+        PATH: '${env.PATH};C:\\Program Files\\Docker\\Docker\\resources\\bin'
     }
 
     stages {
@@ -33,7 +33,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
-                docker run my-node-app
+                docker run --env-file .env -d -p 3000:3000 my-node-app
                 docker ps
                 '''
             }
