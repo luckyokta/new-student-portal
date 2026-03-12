@@ -16,9 +16,9 @@ pipeline {
         stage('Inject ENV') {
             steps {
                 withCredentials([file(credentialId: 'env-file', variable: 'ENVFILE')]) {
-                    sh '''
+                    bat '''
                     rm -f .env
-                    cp '$ENVFILE' .env
+                    copy '%ENVFILE%' .env
                     '''
                 }
             }
@@ -26,13 +26,13 @@ pipeline {
 
         stage('Build Docker') {
             steps {
-                sh 'docker build -t my-node-app .'
+                bat 'docker build -t my-node-app .'
             }
         }
 
         stage('Deploy') {
             steps {
-                sh '''
+                bat '''
                 docker run --env-file .env -d -p 3000:3000 my-node-app
                 docker ps
                 '''
