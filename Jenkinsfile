@@ -15,7 +15,7 @@ pipeline {
 
         stage('Inject ENV') {
             steps {
-                withCredentials([file(credentialId: 'env-file', variable: 'ENVFILE')]) {
+                withCredentials([file(credentialsId: 'env-file', variable: 'ENVFILE')]) {
                     bat '''
                     rm -f .env
                     copy '%ENVFILE%' .env
